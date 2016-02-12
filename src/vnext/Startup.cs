@@ -6,6 +6,7 @@ using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Cors.Infrastructure;
 using Microsoft.AspNet.Hosting;
 using Microsoft.AspNet.Mvc.Formatters;
+using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -39,12 +40,22 @@ namespace CustomerWebApi
             // Configure DI
             ConfigureDI(services);
             
+            // Configure Database & EntityFramework
+            ConfigureDatabase(services);
+        }
+        
+        public void ConfigureDatabase(IServiceCollection services) {
+            // Configures EntityFramework with PostgreSQL
+            services.AddEntityFramework()
+                .AddNpgsql()
+                .AddDbContext<CustomerContext>(options => 
+                    options.UseNpgsql("Server=127.0.0.1;Port=5432;Database=CustomerSampleVNext;User Id=CustomerSample;Password=CustomerSample;"));
         }
         
         public void ConfigureDI(IServiceCollection services) {
             // Either use this or the other customer service by switching the comments
-            services.AddSingleton<ICustomerService, InMemoryCustomerService>();
-            //services.AddSingleton<ICustomerService, DatabaseCustomerService>();
+            //services.AddSingleton<ICustomerService, InMemoryCustomerService>();
+            services.AddSingleton<ICustomerService, DatabaseCustomerService>();
         }
         
         public void ConfigureCors(IServiceCollection services) {

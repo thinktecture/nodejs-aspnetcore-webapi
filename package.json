@@ -1,0 +1,21 @@
+{
+  "name": "nodejs-vnext-webapi",
+  "version": "1.0.0",
+  "description": "Sample for creating Node.js based Web APIs compared to ASP.NET Core 1.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:thinktecture/nodejs-vnext-webapi.git"
+  },
+  "keywords": [],
+  "author": "Thinktecture AG <office@thinktecture.com> (http://thinktecture.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thinktecture/nodejs-vnext-webapi/issues"
+  },
+  "homepage": "https://github.com/thinktecture/nodejs-vnext-webapi#readme",
+  "dependencies": {
+    "pg": "4.4.4",
+    "restify": "4.0.4",
+    "sequelize": "3.19.2"
+  }
+}

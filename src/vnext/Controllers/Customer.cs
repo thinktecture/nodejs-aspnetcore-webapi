@@ -21,7 +21,7 @@ namespace CustomerWebApi
         }
         
         [HttpPost("")]
-        public IActionResult Create(CustomerModel model) {
+        public IActionResult Create([FromBody] CustomerModel model) {
             _customerService.Create(model);
             return Ok();
         }

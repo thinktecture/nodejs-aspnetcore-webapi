@@ -33,54 +33,53 @@ namespace CustomerWebApi
         {
             // Configure CORS
             ConfigureCors(services);
-            
+
             // Configure Web API
             ConfigureMvc(services);
-            
+
             // Configure DI
             ConfigureDI(services);
-            
+
             // Configure Database & EntityFramework
             ConfigureDatabase(services);
         }
-        
-        public void ConfigureDatabase(IServiceCollection services) {
+
+        public void ConfigureDatabase(IServiceCollection services)
+        {
             // Configures EntityFramework with PostgreSQL
             services.AddEntityFramework()
                 .AddNpgsql()
-                .AddDbContext<CustomerContext>(options => 
+                .AddDbContext<CustomerContext>(options =>
                     options.UseNpgsql("Server=127.0.0.1;Port=5432;Database=CustomerSampleVNext;User Id=CustomerSample;Password=CustomerSample;"));
         }
-        
-        public void ConfigureDI(IServiceCollection services) {
+
+        public void ConfigureDI(IServiceCollection services)
+        {
             // Either use this or the other customer service by switching the comments
             //services.AddSingleton<ICustomerService, InMemoryCustomerService>();
             services.AddSingleton<ICustomerService, DatabaseCustomerService>();
         }
-        
-        public void ConfigureCors(IServiceCollection services) {
+
+        public void ConfigureCors(IServiceCollection services)
+        {
             // For this demo allow everything so we don't have to hastle around
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
             corsBuilder.AllowAnyOrigin();
             corsBuilder.AllowCredentials();
-            
-            services.AddCors(options => {
+
+            services.AddCors(options =>
+            {
                 options.AddPolicy("allowAll", corsBuilder.Build());
             });
         }
-        
-        public void ConfigureMvc(IServiceCollection services) {
-            // Add MVC Core and format outputs as JSON always
-            services.AddMvcCore(options => {
-                options.OutputFormatters.Clear();
-                options.OutputFormatters.Add(new JsonOutputFormatter(
-                    new JsonSerializerSettings() {
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
-                    }
-                ));
-            });
+
+        public void ConfigureMvc(IServiceCollection services)
+        {
+            var mvcCore = services.AddMvcCore();
+            
+            mvcCore.AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

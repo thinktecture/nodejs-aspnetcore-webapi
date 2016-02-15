@@ -20,7 +20,6 @@ namespace CustomerWebApi
 
         public void Create(CustomerModel model)
         {
-
             _context.Customers.Add(model);
             _context.SaveChanges();
 

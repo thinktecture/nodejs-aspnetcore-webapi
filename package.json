@@ -14,7 +14,11 @@
   },
   "homepage": "https://github.com/thinktecture/nodejs-vnext-webapi#readme",
   "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "oauth2-server": "^2.4.1",
     "pg": "4.4.4",
+    "request": "^2.69.0",
     "restify": "4.0.4",
     "sequelize": "3.19.2"
   }

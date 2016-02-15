@@ -4,7 +4,8 @@
 const restify = require('restify');
 
 // Require the service which uses an in memory storage
-const customerService = require('../service/customer.inmemory');
+const customerService = require('../service/customer.inmemory'),
+    referenceTokenValidation = require('./referenceTokenValidation');
 
 /**
  * Restify server exposing some APIs to manipulate customer data
@@ -20,6 +21,8 @@ function Server() {
     this.start = port => {
         // Create a new restify server
         var server = restify.createServer();
+
+        server.pre(referenceTokenValidation.validate());
 
         // Include a query parser middleware which will expose all parsed query parameters on a special "req.params" object
         server.use(restify.queryParser());

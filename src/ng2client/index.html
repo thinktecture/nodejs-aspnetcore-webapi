@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Node.js for .NET Devs - Sample API Client</title>
+
+    <!-- inject:css -->
+    <!-- endinject -->
+</head>
+<body>
+
+<nfn-app>Loading...</nfn-app>
+
+<!-- inject:js -->
+<!-- endinject -->
+
+<script>
+    System.config({
+        packages: {
+            app: {
+                format: 'register',
+                defaultExtension: 'js'
+            }
+        }
+    });
+
+    System.import('app/boot')
+            .then(null, console.error.bind(console));
+</script>
+</body>
+</html>

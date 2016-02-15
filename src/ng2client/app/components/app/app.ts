@@ -6,7 +6,8 @@ import {LoginComponent} from '../login/login';
     selector: 'nfn-app',
     templateUrl: 'app/components/app/app.html',
     encapsulation: ViewEncapsulation.Native,
-    directives: [RouterOutlet]
+    directives: [RouterOutlet],
+    styleUrls: ['css/purecss/pure.css']
 })
 @RouteConfig([
     new Route({ path: '/login', name: 'Login', component: LoginComponent, useAsDefault: true }),

@@ -1,12 +1,16 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, Route, RouterOutlet} from 'angular2/router';
 import {LoginComponent} from '../login/login';
+import {APP_SERVICES} from '../../services/services';
+
+import 'rxjs/Rx';
 
 @Component({
     selector: 'nfn-app',
     templateUrl: 'app/components/app/app.html',
     styleUrls: ['css/purecss/pure.css'],
-    directives: [RouterOutlet]
+    directives: [RouterOutlet],
+    providers: APP_SERVICES
 })
 @RouteConfig([
     new Route({ path: '/login', name: 'Login', component: LoginComponent, useAsDefault: true }),

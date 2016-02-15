@@ -1,18 +1,18 @@
 <div class="center">
-    <form class="pure-form pure-form-aligned">
+    <form class="pure-form pure-form-aligned" (submit)="onSubmitted()" #loginForm="ngForm">
         <fieldset>
             <div class="pure-control-group">
                 <label for="name">Username</label>
-                <input id="name" type="text" placeholder="Username">
+                <input id="name" type="text" [(ngModel)]="username" (ngControl)="username" placeholder="Username" required>
             </div>
 
             <div class="pure-control-group">
                 <label for="password">Password</label>
-                <input id="password" type="password" placeholder="Password">
+                <input id="password" type="password" [(ngModel)]="password" (ngControl)="password" placeholder="Password" required>
             </div>
 
             <div class="pure-controls">
-                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+                <button type="submit" class="pure-button pure-button-primary" [disabled]="!loginForm.form.valid">Submit</button>
             </div>
         </fieldset>
     </form>

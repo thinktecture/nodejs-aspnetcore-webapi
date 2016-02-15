@@ -22,7 +22,7 @@ function Customer() {
         return new Promise(resolve => {
             let result = [];
 
-            // Run through the object's keys and all values into an array
+            // Run through the object's keys and put all values into an array
             Object.keys(internalStorage).forEach(key => {
                 result.push(internalStorage[key]);
             });

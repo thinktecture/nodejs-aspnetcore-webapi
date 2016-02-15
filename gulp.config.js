@@ -32,9 +32,14 @@ module.exports = {
         vendorCssFiles: path.join('src', 'ng2client', 'vendor', '**', '*.css'),
         vendorJsFiles: path.join('src', 'ng2client', 'vendor', '**', '*.js'),
         cssFiles: [
+            path.join('build', 'index.css'),
             path.join('build', 'css', '**', '*.css')
         ],
-        lessFiles: path.join('src', 'ng2client', 'less', 'app.less'),
+        lessFiles: [
+            path.join('src', 'ng2client', '**', '*.less'),
+            // Used for mixins etc. so no compilation necessary
+            '!' + path.join('src', 'ng2client', 'less', '*.less')
+        ],
         htmlFiles: [
             path.join('src', 'ng2client', '**', '*.html'),
             '!' + path.join('src', 'ng2client', 'index.html')

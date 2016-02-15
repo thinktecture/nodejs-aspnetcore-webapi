@@ -11,5 +11,5 @@ gulp.task('less-to-css', () => {
         .pipe(autoprefixer({
             browsers: buildConfig.autoprefixerBrowsers
         }))
-        .pipe(gulp.dest(buildConfig.buildFolders.css));
+        .pipe(gulp.dest(buildConfig.buildFolders.root));
 });

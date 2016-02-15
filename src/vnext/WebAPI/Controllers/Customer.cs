@@ -2,10 +2,12 @@ using Microsoft.AspNet.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNet.Authorization;
 
 namespace CustomerWebApi
 {
     [Route("api/[controller]")]
+    [Authorize]
     public class Customer : Controller
     {
         private ICustomerService _customerService { get; set; }

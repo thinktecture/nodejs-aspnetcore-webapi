@@ -1,16 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Cors.Infrastructure;
 using Microsoft.AspNet.Hosting;
-using Microsoft.AspNet.Mvc.Formatters;
 using Microsoft.Data.Entity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace CustomerWebApi
@@ -31,6 +26,8 @@ namespace CustomerWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddWebEncoders();
+
             // Configure CORS
             ConfigureCors(services);
 
@@ -44,7 +41,7 @@ namespace CustomerWebApi
             ConfigureDatabase(services);
         }
 
-        public void ConfigureDatabase(IServiceCollection services)
+        private void ConfigureDatabase(IServiceCollection services)
         {
             // Configures EntityFramework with PostgreSQL
             services.AddEntityFramework()
@@ -53,14 +50,14 @@ namespace CustomerWebApi
                     options.UseNpgsql("Server=127.0.0.1;Port=5432;Database=CustomerSampleVNext;User Id=CustomerSample;Password=CustomerSample;"));
         }
 
-        public void ConfigureDI(IServiceCollection services)
+        private void ConfigureDI(IServiceCollection services)
         {
             // Either use this or the other customer service by switching the comments
             //services.AddSingleton<ICustomerService, InMemoryCustomerService>();
             services.AddSingleton<ICustomerService, DatabaseCustomerService>();
         }
 
-        public void ConfigureCors(IServiceCollection services)
+        private void ConfigureCors(IServiceCollection services)
         {
             // For this demo allow everything so we don't have to hastle around
             var corsBuilder = new CorsPolicyBuilder();
@@ -75,10 +72,19 @@ namespace CustomerWebApi
             });
         }
 
-        public void ConfigureMvc(IServiceCollection services)
+        private void ConfigureMvc(IServiceCollection services)
         {
+            services.AddMvc();
+            return;
             var mvcCore = services.AddMvcCore();
-            
+
+            mvcCore.AddAuthorization();
+
+            mvcCore.AddFormatterMappings();
+
+            // Razor is only needed for token things. 
+            mvcCore.AddRazorViewEngine();
+            mvcCore.AddDataAnnotations();
             mvcCore.AddJsonFormatters(options => options.ContractResolver = new CamelCasePropertyNamesContractResolver());
         }
 
@@ -90,7 +96,24 @@ namespace CustomerWebApi
 
             app.UseIISPlatformHandler();
 
+            UseIdentityServerSecurity(app);
+
             app.UseMvc();
+        }
+
+        private void UseIdentityServerSecurity(IApplicationBuilder app)
+        {
+            JwtSecurityTokenHandler.DefaultInboundClaimFilter.Clear();
+
+            app.UseIdentityServerAuthentication(options =>
+            {
+                options.Authority = "http://localhost:5001/";
+                options.ScopeName = "api";
+                options.ScopeSecret = "apisecret";
+
+                options.AutomaticAuthenticate = true;
+                options.AutomaticChallenge = true;
+            });
         }
 
         // Entry point for the application.

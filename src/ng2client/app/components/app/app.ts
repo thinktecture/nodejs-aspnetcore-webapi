@@ -1,11 +1,11 @@
-import {Component, ViewEncapsulation} from 'angular2/core';
+import {Component} from 'angular2/core';
 import {RouteConfig, Route, RouterOutlet} from 'angular2/router';
 import {LoginComponent} from '../login/login';
 
 @Component({
     selector: 'nfn-app',
     templateUrl: 'app/components/app/app.html',
-    encapsulation: ViewEncapsulation.Native,
+    styleUrls: ['css/purecss/pure.css'],
     directives: [RouterOutlet]
 })
 @RouteConfig([

@@ -74,8 +74,6 @@ namespace CustomerWebApi
 
         private void ConfigureMvc(IServiceCollection services)
         {
-            services.AddMvc();
-            return;
             var mvcCore = services.AddMvcCore();
 
             mvcCore.AddAuthorization();

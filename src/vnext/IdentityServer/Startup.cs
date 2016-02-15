@@ -51,8 +51,7 @@ namespace CustomerWebApi
 
         private void ConfigureMvc(IServiceCollection services)
         {
-            services.AddMvc();
-           // var mvcCore = services.AddMvcCore();
+            var mvcCore = services.AddMvcCore();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -50,7 +50,7 @@ function Server() {
         server.pre(cors.preflight);
 
         // Validate all request for an valid token
-        //server.pre(referenceTokenValidation.validate());
+        server.pre(referenceTokenValidation.validate());
 
         // Allow cors on all routes
         server.use(cors.actual);

@@ -24,6 +24,11 @@ function ReferenceTokenValidation() {
      */
     this.validate = () => {
         return (req, res, next) => {
+            // Don't authorise docs and swagger json
+            if (req.url.indexOf('/docs') === 0 || req.url.indexOf('/swagger.json') === 0) {
+                return next();
+            }
+
             // Get the authorization header
             const authorizationHeader = req.header('authorization');
 

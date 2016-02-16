@@ -17,3 +17,23 @@ module.exports = function (sequelize, DataTypes) {
         }
     });
 };
+
+/**
+ * @swagger
+ * definitions:
+ *  CustomerModel:
+ *      required:
+ *          - id
+ *          - firstName
+ *          - lastName
+ *      properties:
+ *          id:
+ *              type: integer
+ *              description: A unique identifier
+ *          firstName:
+ *              type: string
+ *              description: The first name of the given customer
+ *          lastName:
+ *              type: string
+ *              description: The last name of the given customer
+ */

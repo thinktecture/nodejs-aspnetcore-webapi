@@ -12,8 +12,11 @@ const restify = require('restify'),
 // Require node.js' path module
     path = require('path');
 
-// Require the service which uses an in memory storage
+// Require the services
 const services = require('../service'),
+
+// Require the controllers
+    controllers = require('../controllers'),
 
 // Require the reference token validation service
     referenceTokenValidation = require('./referenceTokenValidation'),
@@ -59,14 +62,8 @@ function Server() {
         // Will parse other content types like application/form-data or application/x-www-form-urlencoded
         server.use(restify.bodyParser());
 
-        // Define a HTTP GET route which will execute "handleCustomerList"
-        server.get('api/customer/list', handleCustomerList);
-
-        // Define a HTTP POST route
-        server.post('api/customer', handleCustomerCreation);
-
-        // Define a HTTP DELETE route
-        server.del('api/customer/:id', handleCustomerDeletion);
+        // Initialize all controllers
+        controllers.initialize(server);
 
         // Configure the database to use PostgreSQL
         database.configure('postgres://CustomerSample:CustomerSample@localhost:5432/CustomerSampleNodejs');
@@ -96,7 +93,10 @@ function Server() {
             },
             host: `localhost:${port}`,
             // Reference this file since it contains the API
-            apis: [path.join(__dirname, 'index.js')],
+            apis: [
+                path.join(__dirname, '..', 'database', 'customerModel.js'),
+                path.join(__dirname, '..', 'controllers', 'customer.js')
+            ],
             produces: ['application/json'],
             consumes: ['application/json'],
             swaggerURL: '/docs',
@@ -104,103 +104,6 @@ function Server() {
             swaggerUI: path.join(__dirname, '..', 'public')
         });
     }
-
-    /**
-     * @swagger
-     * path: /api/customer/list
-     * httpMethod: GET
-     * spec:
-     *  tags:
-     *      - Customer
-     *  summary: This method returns the customer list
-     *  responses:
-     *      200:
-     *          description: Successful response
-     *          schema:
-     *              '$ref': '#/definitions/CustomerModel'
-     */
-    function handleCustomerList(req, res) {
-        // Call list method of the customer service
-        services.get()
-            .then(srv => srv.customer.list())
-            .then(
-                // Successful handler: Return a json
-                customers => res.json(200, customers),
-
-                // Error handler: Send a HTTP status code 500 together with the error
-                err => res.json(500, err)
-            );
-    }
-
-    /**
-     * @swagger
-     * path: /api/customer
-     * httpMethod: POST
-     * spec:
-     *  tags:
-     *      - Customer
-     *  summary: This methods creates a new customer
-     *  responses:
-     *      200:
-     *          description: Customer created
-     */
-    function handleCustomerCreation(req, res) {
-        // req.body contains the json object which was transmitted
-        services.get()
-            .then(srv => srv.customer.create(req.body.firstName, req.body.lastName))
-            .then(
-                () => res.send(200),
-                err => res.json(500, err)
-            );
-    }
-
-    /**
-     * @swagger
-     * path: /api/customer/{id}
-     * httpMethod: DELETE
-     * spec:
-     *  tags:
-     *      - Customer
-     *  summary: This methods removes a customer
-     *  parameters:
-     *      - name: id
-     *        in: path
-     *        description: The id of the user to remove
-     *        required: true
-     *        type: integer
-     *  responses:
-     *      200:
-     *          description: Customer removed
-     */
-    function handleCustomerDeletion(req, res) {
-        // req.params contains the url parameters defined in the route (:id)
-        services.get()
-            .then(srv => srv.customer.remove(req.params.id))
-            .then(
-                () => res.send(200),
-                err => res.send(500, err)
-            );
-    }
-
-    /**
-     * @swagger
-     * definitions:
-     *  CustomerModel:
-     *      required:
-     *          - id
-     *          - firstName
-     *          - lastName
-     *      properties:
-     *          id:
-     *              type: integer
-     *              description: A unique identifier
-     *          firstName:
-     *              type: string
-     *              description: The first name of the given customer
-     *          lastName:
-     *              type: string
-     *              description: The last name of the given customer
-     */
 }
 
 // Expose the Server, so it can be used outside of this JavaScript file. Like a "public class Server..."

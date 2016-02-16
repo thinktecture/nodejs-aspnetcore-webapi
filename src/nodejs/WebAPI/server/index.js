@@ -7,10 +7,15 @@ const restify = require('restify'),
     corsMiddleware = require('restify-cors-middleware');
 
 // Require the service which uses an in memory storage
-const customerService = require('../service/customer.inmemory'),
+const //customerService = require('../service/customer.inmemory'),
+
+    // To use the database approach, uncomment this one and comment out the inMemory service
+    customerService = require('../service/customer.database'),
 
     // Require the reference token validation service
-    referenceTokenValidation = require('./referenceTokenValidation');
+    referenceTokenValidation = require('./referenceTokenValidation'),
+
+    database = require('../database');
 
 /**
  * Restify server exposing some APIs to manipulate customer data
@@ -56,6 +61,9 @@ function Server() {
 
         // Define a HTTP DELETE route
         server.del('api/customer/:id', handleCustomerDeletion);
+
+        // Configure the database to use PostgreSQL
+        database.configure('postgres://CustomerSample:CustomerSample@localhost:5432/CustomerSampleNodejs');
 
         // Start the server on the given port and output a console message, if it started successfully
         server.listen(port, () => {

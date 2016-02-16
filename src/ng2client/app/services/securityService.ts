@@ -8,11 +8,17 @@ export class SecurityService {
     private _clientId: string = 'sample-client';
     private _clientSecret: string = 'sample-secret';
 
+    private _storageKeys = {
+        token: 'sample.token',
+        user: 'sample.user'
+    };
+
     private _token: string;
     private _user: string;
 
     constructor(private _http: Http,
                 private _urlService: UrlService) {
+        this.loadFromLocalStorage();
     }
 
     public getAuthenticated(): boolean {
@@ -38,6 +44,7 @@ export class SecurityService {
 
                 this._token = result.access_token;
                 this._user = username;
+                this.saveToLocalStorage();
 
                 return true;
             }, () => false);
@@ -46,5 +53,21 @@ export class SecurityService {
     public logout(): void {
         this._user = undefined;
         this._token = undefined;
+        this.removeFromLocalStorage();
+    }
+
+    private saveToLocalStorage() {
+        localStorage.setItem(this._storageKeys.token, this._token);
+        localStorage.setItem(this._storageKeys.user, this._user);
+    }
+
+    private loadFromLocalStorage() {
+        this._token = localStorage.getItem(this._storageKeys.token);
+        this._user = localStorage.getItem(this._storageKeys.user);
+    }
+
+    private removeFromLocalStorage() {
+        localStorage.removeItem(this._storageKeys.token);
+        localStorage.removeItem(this._storageKeys.user);
     }
 }

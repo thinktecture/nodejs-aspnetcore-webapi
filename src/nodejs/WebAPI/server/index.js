@@ -3,19 +3,25 @@
 // Require the restify npm module
 const restify = require('restify'),
 
-    // Require the cors middleware for restify
-    corsMiddleware = require('restify-cors-middleware');
+// Require the cors middleware for restify
+    corsMiddleware = require('restify-cors-middleware'),
+
+// Require swagger to build an API documentation
+    swagger = require('swagger-restify'),
+
+// Require node.js' path module
+    path = require('path');
 
 // Require the service which uses an in memory storage
 const //customerService = require('../service/customer.inmemory'),
 
-    // To use the database approach, uncomment this one and comment out the inMemory service
+// To use the database approach, uncomment this one and comment out the inMemory service
     customerService = require('../service/customer.database'),
 
-    // Require the reference token validation service
+// Require the reference token validation service
     referenceTokenValidation = require('./referenceTokenValidation'),
 
-    // Require the database to configure it
+// Require the database to configure it
     database = require('../database');
 
 /**
@@ -31,18 +37,20 @@ function Server() {
      */
     this.start = port => {
         // Create a new restify server
-        var server = restify.createServer();
+        const server = restify.createServer();
 
         // Enable cors for restify
-        var cors = corsMiddleware({
+        const cors = corsMiddleware({
             allowHeaders: ['Authorization']
         });
+
+        initializeSwagger(server, port);
 
         // server.pre runs before other server.use middlewares. It will run before all http requests, so we can handle CORS preflights
         server.pre(cors.preflight);
 
         // Validate all request for an valid token
-        server.pre(referenceTokenValidation.validate());
+        //server.pre(referenceTokenValidation.validate());
 
         // Allow cors on all routes
         server.use(cors.actual);
@@ -72,7 +80,45 @@ function Server() {
         });
     };
 
-    // Handler for api/customer/list exposing restify's req and res parameters
+    function initializeSwagger(server, port) {
+        swagger.init(server, {
+            swagger: '2.0',
+            baseUrl: '/',
+            info: {
+                version: 'v1',
+                title: 'Sample Node.js Web API',
+                description: 'Sample Web API to showcase Node.js compared to ASP.NET Core 1.0',
+                contact: {
+                    name: 'Thinktecture AG',
+                    email: 'office@thinktecture.com',
+                    url: 'http://thinktecture.com'
+                }
+            },
+            host: `localhost:${port}`,
+            // Reference this file since it contains the API
+            apis: [path.join(__dirname, 'index.js')],
+            produces: ['application/json'],
+            consumes: ['application/json'],
+            swaggerURL: '/docs',
+            swaggerJSON: '/swagger.json',
+            swaggerUI: path.join(__dirname, '..', 'public')
+        });
+    }
+
+    /**
+     * @swagger
+     * path: /api/customer/list
+     * httpMethod: GET
+     * spec:
+     *  tags:
+     *      - Customer
+     *  summary: This method returns the customer list
+     *  responses:
+     *      200:
+     *          description: Successful response
+     *          schema:
+     *              '$ref': '#/definitions/CustomerModel'
+     */
     function handleCustomerList(req, res) {
         // Call list method of the customer service
         customerService.list()
@@ -85,6 +131,18 @@ function Server() {
             );
     }
 
+    /**
+     * @swagger
+     * path: /api/customer
+     * httpMethod: POST
+     * spec:
+     *  tags:
+     *      - Customer
+     *  summary: This methods creates a new customer
+     *  responses:
+     *      200:
+     *          description: Customer created
+     */
     function handleCustomerCreation(req, res) {
         // req.body contains the json object which was transmitted
         customerService.create(req.body.firstName, req.body.lastName)
@@ -94,6 +152,24 @@ function Server() {
             );
     }
 
+    /**
+     * @swagger
+     * path: /api/customer/{id}
+     * httpMethod: DELETE
+     * spec:
+     *  tags:
+     *      - Customer
+     *  summary: This methods removes a customer
+     *  parameters:
+     *      - name: id
+     *        in: path
+     *        description: The id of the user to remove
+     *        required: true
+     *        type: integer
+     *  responses:
+     *      200:
+     *          description: Customer removed
+     */
     function handleCustomerDeletion(req, res) {
         // req.params contains the url parameters defined in the route (:id)
         customerService.remove(req.params.id)
@@ -102,6 +178,26 @@ function Server() {
                 err => res.send(500, err)
             );
     }
+
+    /**
+     * @swagger
+     * definitions:
+     *  CustomerModel:
+     *      required:
+     *          - id
+     *          - firstName
+     *          - lastName
+     *      properties:
+     *          id:
+     *              type: integer
+     *              description: A unique identifier
+     *          firstName:
+     *              type: string
+     *              description: The first name of the given customer
+     *          lastName:
+     *              type: string
+     *              description: The last name of the given customer
+     */
 }
 
 // Expose the Server, so it can be used outside of this JavaScript file. Like a "public class Server..."

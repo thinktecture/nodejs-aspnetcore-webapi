@@ -20,6 +20,7 @@
   "dependencies": {
     "angular2": "2.0.0-beta.6",
     "body-parser": "1.15.0",
+    "bower": "1.7.7",
     "cors": "2.7.1",
     "del": "2.2.0",
     "es6-promise": "3.1.2",
@@ -42,6 +43,7 @@
     "run-sequence": "1.1.5",
     "rxjs": "5.0.0-beta.0",
     "sequelize": "3.19.2",
+    "swagger-restify": "github:vellotis/swagger-restify",
     "systemjs": "0.19.20",
     "typescript": "1.7.5",
     "typings": "0.6.8",

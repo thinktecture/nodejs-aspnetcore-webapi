@@ -1,7 +1,10 @@
 'use strict';
 
 // Require the restify npm module
-const restify = require('restify');
+const restify = require('restify'),
+
+    // Require the cors middleware for restify
+    corsMiddleware = require('restify-cors-middleware');
 
 // Require the service which uses an in memory storage
 const customerService = require('../service/customer.inmemory'),
@@ -24,8 +27,19 @@ function Server() {
         // Create a new restify server
         var server = restify.createServer();
 
-        // server.pre runs before other server.use middlewares. It will run before all http requests, so this complete Web API is secured by tokens.
+        // Enable cors for restify
+        var cors = corsMiddleware({
+            allowHeaders: ['Authorization']
+        });
+
+        // server.pre runs before other server.use middlewares. It will run before all http requests, so we can handle CORS preflights
+        server.pre(cors.preflight);
+
+        // Validate all request for an valid token
         server.pre(referenceTokenValidation.validate());
+
+        // Allow cors on all routes
+        server.use(cors.actual);
 
         // Include a query parser middleware which will expose all parsed query parameters on a special "req.params" object
         server.use(restify.queryParser());

@@ -7,7 +7,10 @@ const express = require('express'),
     bodyParser = require('body-parser'),
 
     // Require a oauth2-server for node.js
-    oAuthServer = require('oauth2-server');
+    oAuthServer = require('oauth2-server'),
+
+    // Require the cors middleware for express
+    cors = require('cors');
 
 // Require a oAuthModel which is used by the oauth2-server
 const oAuthModel = require('./oAuthModel');
@@ -26,6 +29,9 @@ function Server() {
     this.start = port => {
         // Create a new express instance
         app = express();
+
+        // Enable cors
+        app.use(cors());
 
         // Add the urlencoded parser middleware for express: https://github.com/expressjs/body-parser#bodyparserurlencodedoptions
         app.use(bodyParser.urlencoded({ extended: true }));

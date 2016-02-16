@@ -5,12 +5,15 @@ using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using IdentityServer4.Core.Services;
+using IdentityServer4.Core.Services.Default;
 
 namespace CustomerWebApi
 {
     public class Startup
     {
         private X509Certificate2 _certificate;
+        private const string CORS_POLICY_NAME = "allowAll";
 
         public Startup(IHostingEnvironment env)
         {
@@ -28,14 +31,33 @@ namespace CustomerWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configure CORS
+            ConfigureCors(services);
+
+            // Configure security related things
             ConfigureSecurity(services);
 
             // Configure Web API
             ConfigureMvc(services);
         }
 
-        private void ConfigureSecurity(IServiceCollection services)
+        private void ConfigureCors(IServiceCollection services)
         {
+            // For this demo allow everything so we don't have to hastle around
+            services.AddCors(options =>
+            {
+                options.AddPolicy(CORS_POLICY_NAME, cors =>
+                {
+                    cors.AllowAnyHeader();
+                    cors.AllowAnyMethod();
+                    cors.AllowAnyOrigin();
+                    cors.AllowCredentials();
+                });
+            });
+        }
+
+        private void ConfigureSecurity(IServiceCollection services)
+        {            
             var identityServer = services.AddIdentityServer(options =>
             {
                 // Use ONLY for developing! Never use this in production. Never.
@@ -47,6 +69,13 @@ namespace CustomerWebApi
             identityServer.AddInMemoryClients(Clients.Get());
             identityServer.AddInMemoryScopes(Scopes.Get());
             identityServer.AddInMemoryUsers(Users.Get());
+            
+            // Enable CORS on identity server
+            identityServer.Services.AddTransient<ICorsPolicyService>(p => {
+                var corsService = new DefaultCorsPolicyService(p.GetRequiredService<ILogger<DefaultCorsPolicyService>>());
+                corsService.AllowAll = true;
+                return corsService;
+            });
         }
 
         private void ConfigureMvc(IServiceCollection services)
@@ -60,8 +89,10 @@ namespace CustomerWebApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseIISPlatformHandler();
+            app.UseCors(CORS_POLICY_NAME);
             
+            app.UseIISPlatformHandler();
+
             app.UseIdentityServer();
 
             app.UseMvc();

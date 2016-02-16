@@ -1,0 +1,30 @@
+<div class="pure-u">
+    <div class="pure-u-1">
+        <h1>Create a new customer</h1>
+        <p>Use the following form to create a new customer.</p>
+
+        <form class="pure-form pure-form-aligned" (submit)="onSubmitted()" #newCustomerForm="ngForm">
+            <fieldset>
+                <div class="pure-control-group">
+                    <label for="firstName">First name</label>
+                    <input id="firstName" type="text" [(ngModel)]="firstName" (ngControl)="firstName"
+                           placeholder="First name"
+                           required>
+                </div>
+
+                <div class="pure-control-group">
+                    <label for="lastName">Last name</label>
+                    <input id="lastName" type="text" [(ngModel)]="lastName" (ngControl)="lastName"
+                           placeholder="Last name" required>
+                </div>
+
+                <div class="pure-controls">
+                    <button type="submit" class="pure-button pure-button-primary"
+                            [disabled]="!newCustomerForm.form.valid">
+                        Create!
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>

@@ -11,8 +11,11 @@ export class AdminCustomerListItemComponent {
     @Input()
     public customer: CustomerModel;
 
+    @Input()
+    public active: boolean;
+
     @Output()
-    public onDeleted: EventEmitter = new EventEmitter();
+    public onDeleted: EventEmitter<void> = new EventEmitter<void>();
 
     constructor(private _customerApiService: CustomerApiService) {
     }

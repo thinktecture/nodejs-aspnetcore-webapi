@@ -1,6 +1,116 @@
 #list {
   margin: 0;
   padding: 0;
+
+  text-align: center;
+
+  .new-customer {
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+
+  nfn-admin-customer-list-item {
+    text-align: left;
+  }
+}
+
+#main {
+  margin: 0;
+  padding: 0;
+}
+
+.email-label-personal,
+.email-label-work,
+.email-label-travel {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  margin-right: 0.5em;
+  border-radius: 3px;
+}
+
+.email-label-personal {
+  background: #ffc94c;
+}
+
+.email-label-work {
+  background: #41ccb4;
+}
+
+.email-label-travel {
+  background: #40c365;
+}
+
+/* Email Item Styles */
+.email-item {
+  padding: 0.9em 1em;
+  border-bottom: 1px solid #ddd;
+  border-left: 6px solid transparent;
+}
+
+.email-avatar {
+  border-radius: 3px;
+  margin-right: 0.5em;
+}
+
+.email-name,
+.email-subject {
+  margin: 0;
+}
+
+.email-name {
+  text-transform: uppercase;
+  color: #999;
+}
+
+.email-desc {
+  font-size: 80%;
+  margin: 0.4em 0;
+}
+
+.email-item-selected {
+  background: #eee;
+}
+
+.email-item-unread {
+  border-left: 6px solid #1b98f8;
+}
+
+/* Email Content Styles */
+.email-content-header, .email-content-body, .email-content-footer {
+  padding: 1em 2em;
+}
+
+.email-content-header {
+  border-bottom: 1px solid #ddd;
+}
+
+.email-content-title {
+  margin: 0.5em 0 0;
+}
+
+.email-content-subtitle {
+  font-size: 1em;
+  margin: 0;
+  font-weight: normal;
+}
+
+.email-content-subtitle span {
+  color: #999;
+}
+
+.email-content-controls {
+  margin-top: 2em;
+  text-align: right;
+}
+
+.email-content-controls .secondary-button {
+  margin-bottom: 0.3em;
+}
+
+.email-avatar {
+  width: 40px;
+  height: 40px;
 }
 
 /*
@@ -23,6 +133,16 @@
     height: 33%;
     border-bottom: 1px solid #ddd;
   }
+
+  #main {
+    position: fixed;
+    top: 33%;
+    right: 0;
+    bottom: 0;
+    left: 150px;
+    overflow: auto;
+    width: auto; /* so that it's not 100% */
+  }
 }
 
 /*
@@ -38,5 +158,12 @@
     width: 350px;
     height: 100%;
     border-right: 1px solid #ddd;
+  }
+
+  /* This will now take up it's own column, so don't need position: fixed; */
+  #main {
+    position: static;
+    margin: 0;
+    padding: 0;
   }
 }

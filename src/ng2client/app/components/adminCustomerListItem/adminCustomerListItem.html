@@ -1,4 +1,4 @@
-<div class="email-item pure-g">
+<div class="email-item pure-g" [ngClass]="{'email-item-selected': active}">
     <div class="pure-u" *ngIf="customer.userImageUrl">
         <img class="email-avatar" height="64" width="64" [src]="customer.userImageUrl">
     </div>

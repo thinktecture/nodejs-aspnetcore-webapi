@@ -1,5 +1,5 @@
 import {Injectable} from 'angular2/core';
-import {Http, Headers} from 'angular2/http';
+import {Http, Headers, Response} from 'angular2/http';
 import {SecurityService} from './securityService';
 import {Observable} from 'rxjs/Observable';
 import {CustomerModel} from '../model/customerModel';
@@ -36,11 +36,23 @@ export class CustomerApiService {
             .toArray();*/
     }
 
-    public remove(userId: number): Observable {
+    public remove(userId: number): Observable<Response> {
         const headers = this.createHeaders();
         const endpoint = `${this._urlService.apiUrl}customer/${userId}`;
 
         return this._http.delete(endpoint, {
+            headers: headers
+        });
+    }
+
+    public create(firstName: string, lastName: string): Observable<Response> {
+        const headers = this.createHeaders();
+        const endpoint = `${this._urlService.apiUrl}/customer`;
+        const payload = new CustomerModel();
+        payload.firstName = firstName;
+        payload.lastName = lastName;
+
+        return this._http.post(endpoint, JSON.stringify(payload), {
             headers: headers
         });
     }

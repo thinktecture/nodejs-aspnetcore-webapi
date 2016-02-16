@@ -20,7 +20,9 @@
     "Microsoft.AspNet.Cors": "6.0.0-rc1-final",
     "IdentityServer4.AccessTokenValidation": "1.0.0-beta3",
     "Microsoft.AspNet.Authorization": "1.0.0-rc1-final",
-    "System.IdentityModel.Tokens": "5.0.0-rc1-211161024"
+    "System.IdentityModel.Tokens": "5.0.0-rc1-211161024",
+    "Swashbuckle.SwaggerGen": "6.0.0-rc1-final",
+    "Swashbuckle.SwaggerUi": "6.0.0-rc1-final"
   },
   "commands": {
     "web": "Microsoft.AspNet.Server.Kestrel"

@@ -1,4 +1,6 @@
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Cors.Infrastructure;
 using Microsoft.AspNet.Hosting;
@@ -7,15 +9,20 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Serialization;
+using Swashbuckle.SwaggerGen;
+using Swashbuckle.SwaggerGen.XmlComments;
 
 namespace CustomerWebApi
 {
     public class Startup
     {
         private const string CORS_POLICY_NAME = "allowAll";
-        
+        private IHostingEnvironment _hostingEnvironment;
+
         public Startup(IHostingEnvironment env)
         {
+            _hostingEnvironment = env;
+
             // Set up configuration sources.
             var builder = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
@@ -41,6 +48,50 @@ namespace CustomerWebApi
 
             // Configure Database & EntityFramework
             ConfigureDatabase(services);
+
+            // Configure Swagger API documentation
+            ConfigureSwaggerApiDocumentation(services);
+        }
+
+        private void ConfigureSwaggerApiDocumentation(IServiceCollection services)
+        {            
+            string pathToXmlDoc = Path.Combine(_hostingEnvironment.WebRootPath, "bin", "Debug", "dnxcore50", "WebAPI.xml");
+            Console.WriteLine(pathToXmlDoc);
+
+            if (!File.Exists(pathToXmlDoc))
+            {
+                pathToXmlDoc = String.Empty;
+            }
+
+            services.AddSwaggerGen();
+            services.ConfigureSwaggerDocument(options =>
+            {
+                options.SingleApiVersion(new Info()
+                {
+                    Version = "v1",
+                    Title = "Sample ASP.NET Core 1.0 API",
+                    Description = "Sample Web API to show case ASP.NET Core 1.0 compared to Node.js",
+                    Contact = new Contact()
+                    {
+                        Name = "Thinktecture AG",
+                        Email = "office@thinktecture.com",
+                        Url = "http://thinktecture.com"
+                    }
+                });
+
+                if (!String.IsNullOrWhiteSpace(pathToXmlDoc))
+                {
+                    options.OperationFilter(new ApplyXmlActionComments(pathToXmlDoc));
+                }
+            });
+
+            services.ConfigureSwaggerSchema(options =>
+            {
+                if (!String.IsNullOrWhiteSpace(pathToXmlDoc))
+                {
+                    options.ModelFilter(new ApplyXmlTypeComments(pathToXmlDoc));
+                }
+            });
         }
 
         private void ConfigureDatabase(IServiceCollection services)
@@ -78,6 +129,7 @@ namespace CustomerWebApi
         {
             var mvcCore = services.AddMvcCore();
 
+            mvcCore.AddApiExplorer();
             mvcCore.AddAuthorization();
 
             mvcCore.AddFormatterMappings();
@@ -96,10 +148,13 @@ namespace CustomerWebApi
 
             app.UseCors(CORS_POLICY_NAME);
             app.UseIISPlatformHandler();
-
+        
             UseIdentityServerSecurity(app);
 
             app.UseMvc();
+            
+            app.UseSwaggerGen();
+            app.UseSwaggerUi(baseRoute: "docs");
         }
 
         private void UseIdentityServerSecurity(IApplicationBuilder app)

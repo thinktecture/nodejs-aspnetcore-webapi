@@ -12,6 +12,8 @@ namespace CustomerWebApi
 {
     public class Startup
     {
+        private const string CORS_POLICY_NAME = "allowAll";
+        
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -68,7 +70,7 @@ namespace CustomerWebApi
 
             services.AddCors(options =>
             {
-                options.AddPolicy("allowAll", corsBuilder.Build());
+                options.AddPolicy(CORS_POLICY_NAME, corsBuilder.Build());
             });
         }
 
@@ -92,6 +94,7 @@ namespace CustomerWebApi
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            app.UseCors(CORS_POLICY_NAME);
             app.UseIISPlatformHandler();
 
             UseIdentityServerSecurity(app);

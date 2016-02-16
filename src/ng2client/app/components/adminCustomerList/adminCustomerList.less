@@ -1,0 +1,42 @@
+#list {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ * On tablets and other medium-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 40em) {
+  /* These are position:fixed; elements that will be in the left 500px of the screen */
+  #list {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    overflow: auto;
+  }
+
+  #list {
+    margin-left: -350px;
+    width: 100%;
+    height: 33%;
+    border-bottom: 1px solid #ddd;
+  }
+}
+
+/*
+ * -- DESKTOP (AND UP) MEDIA QUERIES --
+ * On desktops and other large-sized devices, we want to customize some
+ * of the mobile styles.
+ */
+@media (min-width: 60em) {
+
+  /* This will take up the entire height, and be a little thinner */
+  #list {
+    margin-left: -350px;
+    width: 350px;
+    height: 100%;
+    border-right: 1px solid #ddd;
+  }
+}

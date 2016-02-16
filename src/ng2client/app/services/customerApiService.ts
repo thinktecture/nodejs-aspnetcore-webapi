@@ -17,23 +17,18 @@ export class CustomerApiService {
         return this._http.get(endpoint, {
             headers: headers
         })
-            .map(response => response.json());
-
-        // For later :)
-            /*.flatMap((customers: Array<CustomerModel>) => {
-                const mapped = [];
-
-                customers.forEach((customer: CustomerModel) => mapped.push(this._http.get('http://uifaces.com/api/v1/random')
+            .flatMap(response => Observable.from(response.json()))
+                // Uncomment for some nice uifaces ;-)
+            /*.mergeMap((customer: CustomerModel) => {
+                return this._http.get('http://uifaces.com/api/v1/random')
                     .map(uiFaces => {
                         var result = uiFaces.json();
                         customer.userImageUrl = result.image_urls.bigger;
 
                         return customer;
-                    })));
-
-                return Observable.from(mapped);
-            })
-            .toArray();*/
+                    });
+            })*/
+            .toArray();
     }
 
     public remove(userId: number): Observable<Response> {

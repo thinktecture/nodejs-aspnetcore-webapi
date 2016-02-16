@@ -36,6 +36,15 @@ export class CustomerApiService {
             .toArray();*/
     }
 
+    public remove(userId: number): Observable {
+        const headers = this.createHeaders();
+        const endpoint = `${this._urlService.apiUrl}customer/${userId}`;
+
+        return this._http.delete(endpoint, {
+            headers: headers
+        });
+    }
+
     private createHeaders(): Headers {
         const headers: Headers = new Headers();
         headers.append('Content-Type', 'application/json');

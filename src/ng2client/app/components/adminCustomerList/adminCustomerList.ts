@@ -16,6 +16,10 @@ export class AdminCustomerListComponent implements OnInit {
     }
 
     ngOnInit(): any {
+        this.refresh();
+    }
+
+    private refresh() {
         this._customerApiService.list()
             .subscribe(res => this.customers = res);
     }

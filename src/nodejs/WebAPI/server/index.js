@@ -13,10 +13,7 @@ const restify = require('restify'),
     path = require('path');
 
 // Require the service which uses an in memory storage
-const //customerService = require('../service/customer.inmemory'),
-
-// To use the database approach, uncomment this one and comment out the inMemory service
-    customerService = require('../service/customer.database'),
+const services = require('../service'),
 
 // Require the reference token validation service
     referenceTokenValidation = require('./referenceTokenValidation'),
@@ -74,6 +71,9 @@ function Server() {
         // Configure the database to use PostgreSQL
         database.configure('postgres://CustomerSample:CustomerSample@localhost:5432/CustomerSampleNodejs');
 
+        // Configure services to use database as backend storage
+        services.configure(false);
+
         // Start the server on the given port and output a console message, if it started successfully
         server.listen(port, () => {
             console.log(`Server is up and running on port ${port}`);
@@ -121,7 +121,8 @@ function Server() {
      */
     function handleCustomerList(req, res) {
         // Call list method of the customer service
-        customerService.list()
+        services.get()
+            .then(srv => srv.customer.list())
             .then(
                 // Successful handler: Return a json
                 customers => res.json(200, customers),
@@ -145,7 +146,8 @@ function Server() {
      */
     function handleCustomerCreation(req, res) {
         // req.body contains the json object which was transmitted
-        customerService.create(req.body.firstName, req.body.lastName)
+        services.get()
+            .then(srv => srv.customer.create(req.body.firstName, req.body.lastName))
             .then(
                 () => res.send(200),
                 err => res.json(500, err)
@@ -172,7 +174,8 @@ function Server() {
      */
     function handleCustomerDeletion(req, res) {
         // req.params contains the url parameters defined in the route (:id)
-        customerService.remove(req.params.id)
+        services.get()
+            .then(srv => srv.customer.remove(req.params.id))
             .then(
                 () => res.send(200),
                 err => res.send(500, err)

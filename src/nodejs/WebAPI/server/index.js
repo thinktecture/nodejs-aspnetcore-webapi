@@ -92,7 +92,7 @@ function Server() {
                 }
             },
             host: `localhost:${port}`,
-            // Reference this file since it contains the API
+            // Reference the files containing the swagger definitions
             apis: [
                 path.join(__dirname, '..', 'database', 'customerModel.js'),
                 path.join(__dirname, '..', 'controllers', 'customer.js')

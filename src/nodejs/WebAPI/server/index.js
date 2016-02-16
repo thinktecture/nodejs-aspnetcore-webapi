@@ -15,6 +15,7 @@ const //customerService = require('../service/customer.inmemory'),
     // Require the reference token validation service
     referenceTokenValidation = require('./referenceTokenValidation'),
 
+    // Require the database to configure it
     database = require('../database');
 
 /**

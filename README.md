@@ -83,6 +83,10 @@ To start the Angular 2 Client, run `npm run watch` within the root of the reposi
 
 Since both backends lack a support for user management, those credentials are the only one which are working. :-)
 
+### Presentation
+
+If you want to start the presentation yourself, you need to spin up a static http server (like [node-static](https://github.com/cloudhead/node-static)) in the `presentation` directory.
+
 ## Third-Party Libraries
 
 This section contains notable third-party libraries.

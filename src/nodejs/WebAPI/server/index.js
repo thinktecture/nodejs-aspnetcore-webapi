@@ -33,10 +33,6 @@ function Server() {
         controllers.initialize(server);
         database.configure('postgres://CustomerSample:CustomerSample@localhost:5432/CustomerSampleNodejs');
         services.configure(false);
-
-        server.listen(port, () => {
-            console.log(`Server is up and running on port ${port}`);
-        });
     };
 
     function initializeSwagger(server, port) {

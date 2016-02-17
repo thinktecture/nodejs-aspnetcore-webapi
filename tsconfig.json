@@ -12,7 +12,7 @@
   "exclude": [
     "node_modules",
     "src/nodejs",
-    "src/vnext",
+    "src/aspNetCore",
     "typings/main",
     "typings/main.d.ts"
   ]

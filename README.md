@@ -25,15 +25,15 @@ Both Node.js and ASP.NET Core 1.0 APIs are split into two projects:
 				* Database name: `CustomerSampleNodejs`
 				* Username: `CustomerSample`
 				* Password: `CustomerSample`
-				* Can be configured in [server/index.js](https://github.com/thinktecture/nodejs-vnext-webapi/blob/master/src/nodejs/WebAPI/server/index.js#L69)
+				* Can be configured in [server/index.js](https://github.com/thinktecture/nodejs-aspnetcore-webapi/blob/master/src/nodejs/WebAPI/server/index.js#L69)
 		* ASP.NET Core 1.0: 
-			* Switch the comments within `ConfigureDI` [here](https://github.com/thinktecture/nodejs-vnext-webapi/blob/master/src/vnext/WebAPI/Startup.cs#L108) 
+			* Switch the comments within `ConfigureDI` [here](https://github.com/thinktecture/nodejs-aspnetcore-webapi/blob/master/src/aspNetCore/WebAPI/Startup.cs#L108)
 			* Default PostgreSQL settings:
 				* Host: `localhost`
 				* Database name: `CustomerSampleVNext`
 				* Username: `CustomerSample`
 				* Password: `CUstomerSample`
-				* Can be configured in [Startup.cs](src/vnext/WebAPI/Startup.cs#L103)
+				* Can be configured in [Startup.cs](src/aspNetCore/WebAPI/Startup.cs#L103)
 
 You can either start both projects as Node.js or as ASP.NET Core 1.0. They won't work together, so you can not use Node.js STS and ASP.NET Core 1.0 Web API. 
 
@@ -60,7 +60,7 @@ To install PostgreSQL on Windows you can use a graphical installer which can be 
 ### ASP.NET Core 1.0
 
 * [ASP.NET 5](https://docs.asp.net/en/latest/index.html).
-* After installing ASP.NET 5 you need to execute `dnu restore` in `src/vnext/STS` and `src/vnext/WebAPI`.
+* After installing ASP.NET 5 you need to execute `dnu restore` in `src/aspNetCore/STS` and `src/aspNetCore/WebAPI`.
 
 ## Starting
 
@@ -71,8 +71,8 @@ To install PostgreSQL on Windows you can use a graphical installer which can be 
 
 ### ASP.NET Core 1.0
 
-* STS: To start STS execute `dnx web` in `src/vnext/STS`. It will then be accessible via `http://localhost:5001`.
-* Web API: To start Web API execute `dnx web` in `src/vnext/WebAPI`. It will then be accessible via `http://localhost:5000`.
+* STS: To start STS execute `dnx web` in `src/aspNetCore/STS`. It will then be accessible via `http://localhost:5001`.
+* Web API: To start Web API execute `dnx web` in `src/aspNetCore/WebAPI`. It will then be accessible via `http://localhost:5000`.
 
 ### Angular 2 Client
 

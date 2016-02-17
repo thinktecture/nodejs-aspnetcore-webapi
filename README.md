@@ -110,4 +110,10 @@ This section contains notable third-party libraries.
 ### Angular 2 Client
 
 * [Angular 2](https://angular.io) itself. ;-)
-* [Gulp](http://gulpjs.com) for building and watching 
+* [Gulp](http://gulpjs.com) for building and watching
+
+## Additional resources
+
+* [Node.js at Paypal](https://www.paypal-engineering.com/?s=node)
+* [Node.js at Netflix](http://techblog.netflix.com/search/label/node.js)
+* [Node.js at Walmart](https://www.joyent.com/developers/videos/node-js-at-walmart-introduction)

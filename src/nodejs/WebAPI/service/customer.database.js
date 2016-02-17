@@ -7,17 +7,13 @@ const database = require('../database');
  * @constructor
  */
 function CustomerService() {
+    this.create = (firstName, lastName) => {
+        
+    };
+
     this.list = () => {
         return database.get()
             .then(db => db.models.customer.findAll());
-    };
-
-    this.create = (firstName, lastName) => {
-        return database.get()
-            .then(db => db.models.customer.create({
-                firstName: firstName,
-                lastName: lastName
-            }));
     };
 
     this.remove = id => {

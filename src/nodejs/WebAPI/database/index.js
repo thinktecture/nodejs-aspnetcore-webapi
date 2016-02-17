@@ -38,7 +38,6 @@ function Database() {
 
 let database;
 
-// Using a provider pattern for db configuration and initialization
 module.exports = {
     configure: (connectionString) => {
         config = {

@@ -39,6 +39,18 @@ You can either start both projects as Node.js or as ASP.NET Core 1.0. They won't
 
 ## Setup
 
+### PostgreSQL
+
+For a general admin UI to create users and databases, you can use [pgAdmin](http://www.pgadmin.org/), which works on all platforms.
+
+#### OS X
+
+The easiest way to use PostgreSQL on Mac OS X is by installing [Postgres.app](http://postgresapp.com/). Then use the pgAdmin to create the user and databases as shown above.
+
+#### Windows
+
+To install PostgreSQL on Windows you can use a graphical installer which can be downloaded [here](http://www.postgresql.org/download/windows/). It comes with pgAdmin, so you don't need to install it separately. After installation use pgAdmin to create the user and databases as shown above.
+
 ### Node.js
 
 * Install [Node.js](https://nodejs.org/en/) > v5 .

@@ -121,7 +121,7 @@
                 <ul>
                     <li>Server-side JavaScript powered by Chrome's V8 JavaScript Engine</li>
                     <li>Asynchronous, event-driven I/O API</li>
-                    <li>NuGet like package manager: Node Package Manager (npm)</li>
+                    <li>NuGet-like package manager: Node Package Manager (npm)</li>
                     <li>Cross platform: OS X, Windows, Linux</li>
                     <li>Upcoming: alternative runtime Microsoft's ChakraCore</li>
                 </ul>
@@ -152,23 +152,27 @@
                                 <ul>
                                     <li>JS, TS, CS, ...</li>
                                     <li>Node Package Manager</li>
-                                    <li>Single threaded</li>
-                                    <li>Callbacks, Promises</li>
                                     <li>Dynamic types</li>
+                                    <li>Single threaded Event Loop<br/>
+                                        <small>but async I/O threads</small>
+                                    </li>
                                 </ul>
                             </td>
-                            <td>
+                            <td style="vertical-align: top">
                                 <ul>
                                     <li>C#</li>
                                     <li>NuGet</li>
-                                    <li>Multi threaded</li>
-                                    <li>Async/Await</li>
                                     <li>Static types</li>
+                                    <li>Multi threaded</li>
                                 </ul>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </section>
+            <section>
+                <h2>Node.js - server</h2>
+                <img src="images/node-js-server.png">
             </section>
             <section>
                 <h2>Node.js - Pros</h2>
@@ -185,10 +189,10 @@
                 </ul>
             </section>
             <section>
-                <h2>Node.js - Cons</h2>
+                <h2>Node.js - Watch out</h2>
                 <ul>
-                    <li>Single threaded: Avoid heavy CPU usage</li>
-                    <li>Utilizes one CPU only</li>
+                    <li>Single threaded Event Loop<br/><small>Avoid heavy CPU usage via JS</small></li>
+                    <li>Utilizes one CPU only<br/><small>Scale via clustering</small></li>
                     <li>Relational databases can be <em>strange</em></li>
                     <li>Code is documentation</li>
                 </ul>
@@ -199,11 +203,10 @@
             <section>
                 <h2>Restify - Overview</h2>
                 <ul>
-                    <li>Module to build REST web services</li>
+                    <li>Node.js module to build Web APIs</li>
                     <li>Middleware support (OWIN like)</li>
                     <li>Client and server components</li>
                     <li>Routing</li>
-                    <li>WebSockets via socket.io</li>
                 </ul>
             </section>
             <section>
@@ -322,7 +325,8 @@ public IActionResult Delete() { }
                     <ul>
                         <li>Entity Framework 7</li>
                         <li>Supports multiple databases <br/>
-                        <small>MSSQL, Sqlite, InMemory, PostgreSQL</small></li>
+                            <small>MSSQL, Sqlite, InMemory, PostgreSQL</small>
+                        </li>
                         <li>Code First, Database First</li>
                         <li>Migrations</li>
                     </ul>

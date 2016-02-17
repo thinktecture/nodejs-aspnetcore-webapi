@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Web APIs with Node.js for .NET developers</title>
+    <meta name="author" content="Manuel Rauber">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <style>
+        .reveal .controls {
+            bottom: 75px;
+        }
+
+        .no-border {
+            border: 0 !important;
+        }
+
+        .no-shadow {
+            box-shadow: none !important;
+        }
+
+        .reveal section h2 {
+            color: #7195C2;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="reveal">
+        <!-- Any section element inside of this container is displayed as a slide -->
+        <div class="slides">
+            <section class="frontpage">
+                <h1>Web APIs</h1>
+                <h3>with Node.js for .NET developers</h3>
+                <p>
+                    <small>Manuel Rauber</small>
+                </p>
+                <p><img src="images/ttLogo.png" style="width: 15%" class="tt-logo"/><br/>
+                    <small><a href="http://thinktecture.com" class="tt-link">thinktecture.com</a></small>
+                </p>
+            </section>
+            <section>
+                <h2>Introduction</h2>
+                <table class="narrow">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center"><img src="images/mr.png" class="portrait"/><br/>Manuel Rauber
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>
+                                    <small>manuel.rauber@thinktecture.com</small>
+                                    <br/>
+                                    <small><a href="https://manuel-rauber.com"
+                                              style="color: white">https://manuel-rauber.com</a></small>
+                                    <br/>
+                                    <small>@manuelrauber</small>
+                                </p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Talking points</h2>
+                <ul>
+                    <li>Node.js Overview</li>
+                    <li>Restify</li>
+                    <li>Token Authentication</li>
+                    <li>Databases</li>
+                    <li>Examples</li>
+                </ul>
+            </section>
+            <section>
+                <h1>Node.js</h1>
+            </section>
+            <section>
+                <h2>Node.js - Intro</h2>
+                <ul>
+                    <li class="fragment">Node.js is <em>not</em> jQuery in cool ;-)</li>
+                    <li class="fragment">Server-side JavaScript powered by Chrome's V8 JavaScript Engine</li>
+                    <li class="fragment">Asynchronous, event-driven I/O API</li>
+                    <li class="fragment">NuGet like package manager: Node Package Manager (npm)</li>
+                    <li class="fragment">Cross platform: OS X, Windows, Linux</li>
+                    <li class="fragment">Upcoming: alternative runtime Microsoft's ChakraCore</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Node.js - Feature support</h2>
+                <ul>
+                    <li>ECMAScript 6</li>
+                    <li>Experimental ECMAScript 7</li>
+                    <li>Classes</li>
+                    <li>Typed arrays</li>
+                    <li>Fat Arrow/Lambda Expressions</li>
+                    <li>Templated Strings</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Node.js - ASP.NET Core 1.0</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Node.js</th>
+                            <th>ASP.NET Core 1.0</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <ul>
+                                    <li>JS, TS, CS, ...</li>
+                                    <li>Node Package Manager</li>
+                                    <li>Single threaded</li>
+                                    <li>Callbacks, Promises</li>
+                                    <li>Dynamic types</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>C#</li>
+                                    <li>NuGet</li>
+                                    <li>Multi threaded</li>
+                                    <li>Async/Await</li>
+                                    <li>Static types</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                <h2>Node.js - Pros</h2>
+                <ul>
+                    <li>Full stack JS development</li>
+                    <li>Universal JavaScript<br/>
+                        <small>Same code on client and server</small>
+                    </li>
+                    <li>Built-in streaming</li>
+                    <li>Open Source loving community</li>
+                    <li>Enterprise proven<br/>
+                        <small>Paypal, Netflix, Groupon</small>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Node.js - Cons</h2>
+                <ul>
+                    <li>Single threaded: Avoid heavy CPU usage</li>
+                    <li>Utilizes one CPU only</li>
+                    <li>Relational databases can be <em>strange</em></li>
+                    <li>Code is documentation</li>
+                </ul>
+            </section>
+            <section>
+                <h1>Restify</h1>
+            </section>
+            <section>
+                <h2>Restify - Overview</h2>
+                <ul>
+                    <li>Module to build REST web services</li>
+                    <li>Middleware support (OWIN like)</li>
+                    <li>Client and server components</li>
+                    <li>Routing</li>
+                    <li>WebSockets via socket.io</li>
+                </ul>
+            </section>
+            <section>
+                <section>
+                    <h2>Restify - Middleware</h2>
+                    <pre><code data-trim contenteditable>const server = restify.createServer();
+// Runs before .use handlers
+server.pre((req, res, next) => { /* Do something */ });
+// Runs after .pre handlers
+server.use((req, res, next) => { /* Do something */ });
+// Sample: Using a predefined middleware
+server.use(restify.bodyParser());</code></pre>
+                </section>
+                <section>
+                    <h2>ASP.NET Core 1.0 - Middleware</h2>
+                    <pre><code data-trim contenteditable>public void ConfigureServices(IServiceCollection services)
+{
+    // Add a predefined middleware
+    services.AddMvc();
+}
+
+public void Configure(IApplicationBuilder app,
+    IHostingEnvironment env,
+    ILoggerFactory loggerFactory)
+{
+    // Use a predefined middleware
+    app.UseMvc();
+}</code></pre>
+                </section>
+            </section>
+            <section>
+                <section>
+                    <h2>Restify - Routing</h2>
+                    <pre><code data-trim contenteditable>// HTTP GET
+server.get('/hello', (req, res) => res.send(200, 'Hello World'));
+// HTTP POST
+server.post('/upload', someMiddleware);
+// HTTP PUT
+server.put('/customer/:id', middleware1, middleware2);
+// HTTP DELETE
+server.del('/customer/:id', anotherMiddleware);</code></pre>
+                </section>
+                <section>
+                    <h2>ASP.NET Core 1.0 - Routing</h2>
+                    <pre><code data-trim contenteditable>[HttpGet("hello")]
+public IActionResult Get() {
+    return Ok("Hello World");
+}
+
+[HttpPost("upload")]
+public IActionResult Post() { }
+
+[HttpPut("customer/{id}")]
+public IActionResult Put(int id) { }
+
+[HttpDelete("customer/{id}")]
+public IActionResult Delete() { }
+                    </code></pre>
+                </section>
+            </section>
+            <section>
+                <h1>Token Authentication</h1>
+            </section>
+            <section>
+                <h1>Databases</h1>
+            </section>
+            <section>
+                <h1>Live Demo</h1>
+            </section>
+            <section>
+                <h1>Thank you!</h1>
+                <div style="height: 50px"></div>
+                <p>
+                    GitHub repository<br/><a href="https://github.com/thinktecture/nodejs-vnext-webapi">https://github.com/thinktecture/nodejs-vnext-webapi</a>
+                </p>
+                <div style="height: 100px"></div>
+                <p><img src="images/ttLogo.png" style="width: 15%" class="tt-logo"/><br/>
+                    <small><a href="http://thinktecture.com" class="tt-link">thinktecture.com</a></small>
+                </p>
+            </section>
+            <section>
+                <h1>Resources</h1>
+                <small>
+                    <ul>
+                        <li>GitHub repository: <a href="https://github.com/thinktecture/nodejs-vnext-webapi">https://github.com/thinktecture/nodejs-vnext-webapi</a>
+                        </li>
+
+                    </ul>
+                </small>
+            </section>
+        </div>
+    </div>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+        // Full list of configuration options available at:
+        // https://github.com/hakimel/reveal.js#configuration
+        Reveal.initialize({
+            history: true,
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+            // Optional reveal.js plugins
+            dependencies: [
+                {
+                    src: 'lib/js/classList.js', condition: function () {
+                    return !document.body.classList;
+                }
+                },
+                {
+                    src: 'plugin/highlight/highlight.js', async: true, condition: function () {
+                    return !!document.querySelector('pre code');
+                }, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+                },
+                { src: 'plugin/zoom-js/zoom.js', async: true }
+            ]
+        });
+    </script>
+</body>
+
+</html>

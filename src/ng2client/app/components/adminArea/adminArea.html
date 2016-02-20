@@ -1,5 +1,13 @@
 <div class="flakes-frame">
     <nfn-navigation></nfn-navigation>
 
-    <router-outlet></router-outlet>
+    <div class="flakes-content" [class.open]="isOpen">
+        <div class="flakes-mobile-top-bar">
+            <span class="navigation-expand-target box-shadow-menu" (click)="isOpen = !isOpen"></span>
+        </div>
+
+        <div class="view-wrap">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>

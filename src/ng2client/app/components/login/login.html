@@ -1,20 +1,22 @@
 <div class="center">
-    <h1>Login</h1>
-    <form class="pure-form pure-form-aligned" (submit)="onSubmitted()" #loginForm="ngForm">
-        <fieldset>
-            <div class="pure-control-group">
-                <label for="name">Username</label>
-                <input id="name" type="text" [(ngModel)]="username" (ngControl)="username" placeholder="Username" required>
-            </div>
-
-            <div class="pure-control-group">
-                <label for="password">Password</label>
-                <input id="password" type="password" [(ngModel)]="password" (ngControl)="password" placeholder="Password" required>
-            </div>
-
-            <div class="pure-controls">
-                <button type="submit" class="pure-button pure-button-primary" [disabled]="!loginForm.form.valid">Submit</button>
-            </div>
-        </fieldset>
-    </form>
+    <fieldset>
+        <legend>Login</legend>
+        <form (submit)="onSubmitted()" #loginForm="ngForm">
+            <ul>
+                <li>
+                    <label for="name">Username</label>
+                    <input id="name" type="text" [(ngModel)]="username" (ngControl)="username" placeholder="Username"
+                           required>
+                </li>
+                <li>
+                    <label for="password">Password</label>
+                    <input id="password" type="password" [(ngModel)]="password" (ngControl)="password"
+                           placeholder="Password" required>
+                </li>
+                <li>
+                    <button type="submit" [disabled]="!loginForm.form.valid">Submit</button>
+                </li>
+            </ul>
+        </form>
+    </fieldset>
 </div>

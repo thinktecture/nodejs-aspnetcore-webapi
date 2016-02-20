@@ -9,7 +9,6 @@ import {AdminAreaComponent} from '../adminArea/adminArea';
 @Component({
     selector: 'nfn-app',
     templateUrl: 'app/components/app/app.html',
-    styleUrls: ['css/purecss/pure.css'],
     directives: [RouterOutlet],
     providers: APP_SERVICES
 })

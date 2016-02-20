@@ -7,8 +7,7 @@ import {RouterLink} from 'angular2/router';
 @Component({
     selector: 'nfn-admin-customer-list',
     templateUrl: 'app/components/adminCustomerList/adminCustomerList.html',
-    directives: [AdminCustomerListItemComponent, RouterLink],
-    styleUrls: ['app/components/adminCustomerList/adminCustomerList.css']
+    directives: [AdminCustomerListItemComponent, RouterLink]
 })
 export class AdminCustomerListComponent implements OnInit {
     public customers: Array<CustomerModel> = [];

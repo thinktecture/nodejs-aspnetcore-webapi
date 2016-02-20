@@ -4,8 +4,7 @@ import {CustomerApiService} from '../../services/customerApiService';
 
 @Component({
     selector: 'nfn-admin-customer-list-item',
-    templateUrl: 'app/components/adminCustomerListItem/adminCustomerListItem.html',
-    styleUrls: ['app/components/adminCustomerListItem/adminCustomerListItem.css']
+    templateUrl: 'app/components/adminCustomerListItem/adminCustomerListItem.html'
 })
 export class AdminCustomerListItemComponent {
     @Input()

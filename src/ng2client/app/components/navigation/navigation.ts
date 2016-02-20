@@ -5,7 +5,6 @@ import {SecurityService} from '../../services/securityService';
 @Component({
     selector: 'nfn-navigation',
     templateUrl: 'app/components/navigation/navigation.html',
-    styleUrls: ['app/components/navigation/navigation.css'],
     directives: [RouterLink]
 })
 export class NavigationComponent {

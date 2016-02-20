@@ -52,3 +52,18 @@ li.router-link-active {
     }
   }
 }
+
+// Makes flakes using the whole width
+@media only screen and (min-width: 1150px) {
+  html {
+    .flakes-frame {
+      .flakes-content {
+        width: ~"calc(100vw - 250px)";
+      }
+    }
+  }
+}
+
+table.flakes-table tbody tr.active td {
+  background-color: lightgray;
+}

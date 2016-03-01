@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Web APIs with Node.js for .NET developers</title>
+    <title>Web-APIs mit Node.js für .NET-Entwickler – über den Tellerrand geblickt</title>
     <meta name="author" content="Manuel Rauber">
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -29,6 +29,24 @@
             bottom: 75px;
         }
 
+        .reveal {
+            background-image: url('images/basta-spring-footer.png');
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+
+        body .reveal .slide-number {
+            right: 5px;
+            bottom: 5px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .frontpage > * {
+            visibility: hidden;
+        }
+
         .no-border {
             border: 0 !important;
         }
@@ -47,7 +65,7 @@
     <div class="reveal">
         <!-- Any section element inside of this container is displayed as a slide -->
         <div class="slides">
-            <section class="frontpage">
+            <section class="frontpage" data-background="images/basta-spring-background.png">
                 <h1 style="color: #7195C2">Web APIs</h1>
                 <h3>with JavaScript &amp; Node.js<br/>for .NET developers</h3>
                 <p>
@@ -378,6 +396,7 @@ public IActionResult Delete() { }
         // https://github.com/hakimel/reveal.js#configuration
         Reveal.initialize({
             history: true,
+            controls: false,
             slideNumber: true,
             transition: 'slide', // none/fade/slide/convex/concave/zoom
 

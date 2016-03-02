@@ -5,13 +5,13 @@
             <ul>
                 <li>
                     <label for="name">Username</label>
-                    <input id="name" type="text" [(ngModel)]="username" (ngControl)="username" placeholder="Username"
+                    <input id="name" type="text" [(ngModel)]="username" (ngControl)="username" placeholder="Username = bob"
                            required>
                 </li>
                 <li>
                     <label for="password">Password</label>
                     <input id="password" type="password" [(ngModel)]="password" (ngControl)="password"
-                           placeholder="Password" required>
+                           placeholder="Password = bob" required>
                 </li>
                 <li>
                     <button type="submit" [disabled]="!loginForm.form.valid" class="button-blue">Submit</button>

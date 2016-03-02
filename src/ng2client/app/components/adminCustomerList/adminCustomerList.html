@@ -3,6 +3,7 @@
     <div class="span-1">
         <div class="flakes-actions-bar">
             <a class="action button-gray smaller" [routerLink]="['AdminCustomersCreate']">Create new customer</a>
+            <span class="action button-gray smaller" [hidden]="!selectedCustomer" (click)="deleteSelectedCustomer()">Delete selected customer</span>
         </div>
         <table class="flakes-table">
             <thead>

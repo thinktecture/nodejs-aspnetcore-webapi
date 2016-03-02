@@ -27,4 +27,13 @@ export class AdminCustomerListComponent implements OnInit {
                 this.selectedCustomer = undefined;
             });
     }
+
+    public deleteSelectedCustomer(): void {
+        if (!this.selectedCustomer) {
+            return;
+        }
+
+        this._customerApiService.remove(this.selectedCustomer.id)
+            .subscribe(() => this.refresh());
+    }
 }

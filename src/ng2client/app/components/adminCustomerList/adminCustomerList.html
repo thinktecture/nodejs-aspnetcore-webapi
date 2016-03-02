@@ -1,125 +1,61 @@
-<div id="list" class="pure-u-1">
-    <a class="pure-button pure-button-primary new-customer" [routerLink]="['AdminCustomersCreate']">Create new
-        customer</a>
-
-    <nfn-admin-customer-list-item template="ngFor #customer of customers" [customer]="customer" (onDeleted)="refresh()"
-                                  (click)="selectedCustomer = customer" [active]="selectedCustomer === customer"></nfn-admin-customer-list-item>
-</div>
-<div id="main" class="pure-u-1" *ngIf="selectedCustomer">
-    <div class="email-content">
-        <div class="email-content-header pure-g">
-            <div class="pure-u-1-2">
-                <h1 class="email-content-title">{{ selectedCustomer.firstName }} {{ selectedCustomer.lastName }}</h1>
-                <p class="email-content-subtitle">
-                    Customer Details
-                </p>
-            </div>
+<h1>Customer list</h1>
+<div class="grid-3 gutter-20">
+    <div class="span-1">
+        <div class="flakes-actions-bar">
+            <a class="action button-gray smaller" [routerLink]="['AdminCustomersCreate']">Create new customer</a>
         </div>
-
-        <div class="email-content-body">
-
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac lacus odio. Aenean eget nibh in sapien
-                facilisis faucibus eu et risus. Suspendisse suscipit ante neque, quis blandit justo porta in. Mauris
-                accumsan ipsum ex, non ultricies orci dapibus id. Quisque sollicitudin efficitur nulla, eu aliquet risus
-                fringilla in. Quisque facilisis lorem sapien, in molestie nibh tincidunt volutpat. Etiam sit amet enim
-                molestie, faucibus nibh vel, blandit diam. Ut tempor ante a enim imperdiet, non lacinia ipsum
-                consequat.</p>
-
-            <p>Integer dapibus lacus sit amet quam luctus posuere. Etiam a mauris lectus. Duis convallis libero lorem,
-                eu
-                sollicitudin augue vulputate in. Phasellus vitae leo sed ligula consectetur auctor. Cras tincidunt augue
-                pulvinar ex laoreet pharetra. Aenean vel sapien lobortis, mattis nisi at, gravida nisl. Phasellus
-                dignissim
-                tellus vitae efficitur tempus. Nam et ullamcorper dolor, vitae blandit tellus. Quisque pretium eros id
-                odio
-                interdum tempor in vel risus. Mauris id leo sollicitudin, suscipit elit sed, cursus turpis. Aenean
-                ultrices
-                sapien a lacinia pharetra. Quisque id metus a lacus euismod tempus vitae faucibus sapien. Donec non
-                ligula
-                faucibus, feugiat lectus et, mattis risus. Integer lobortis purus dolor, id faucibus diam euismod
-                at.</p>
-
-            <p>In dictum, turpis et dictum commodo, nibh ex pellentesque ligula, id pharetra lacus eros vel dui. Nullam
-                bibendum congue lacus, non pharetra quam facilisis nec. Etiam et molestie ipsum, in scelerisque augue.
-                Nam
-                condimentum venenatis libero sed ornare. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-                Mauris et ligula neque. Nulla facilisi. Maecenas mi magna, vehicula eu scelerisque id, ultricies at
-                tellus.
-                Praesent finibus blandit purus eget volutpat. Nullam ac commodo ipsum. Sed consequat ex non quam porta
-                efficitur. Aliquam erat volutpat.</p>
-
-            <p>Cras odio lectus, viverra condimentum ex ut, dictum accumsan tellus. Phasellus et semper leo, placerat
-                mattis neque. In dictum metus nec ante vulputate consequat. Vivamus consequat sodales nisl a ultricies.
-                Nam
-                sed volutpat nulla. Integer nec nisi sodales, pellentesque arcu sit amet, pharetra enim. Aenean a felis
-                sed
-                purus feugiat dignissim sed porttitor eros. Nunc ac scelerisque justo, eu luctus ipsum. Phasellus
-                volutpat
-                dictum dui, et pellentesque mi suscipit vel. In ac sapien sit amet neque tempor malesuada nec vel risus.
-                Donec gravida dolor in lectus rutrum interdum. Interdum et malesuada fames ac ante ipsum primis in
-                faucibus.
-                Ut sed velit turpis. Nulla facilisi. Donec lacinia, lacus et finibus ultrices, urna elit dapibus purus,
-                non
-                viverra sapien ante ac nunc.</p>
-
-            <p>Praesent elementum augue ut elit ornare rutrum. Curabitur interdum elit eget molestie varius. Nulla
-                facilisi. Nullam ac odio ut nisi pretium pretium vel et elit. Aenean commodo dignissim arcu eget
-                molestie.
-                Quisque suscipit ut nulla eget vestibulum. Vestibulum auctor arcu libero, ac ultricies massa rhoncus sit
-                amet. Nunc molestie rhoncus risus eu malesuada. Aliquam eleifend rhoncus mi at molestie. Aliquam gravida
-                leo
-                sit amet nibh molestie, in iaculis felis tincidunt. Praesent iaculis eros ipsum, at tempus dolor ornare
-                ut.
-                Quisque ultricies efficitur ex, vel pellentesque sapien aliquam a. Aliquam scelerisque metus vel dui
-                fermentum, at cursus est laoreet. Curabitur elementum et enim at dictum.</p>
-
-            <p>Vivamus luctus, ipsum id porta ultrices, leo dolor blandit nisl, a tincidunt dolor leo ut ipsum.
-                Vestibulum
-                ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean scelerisque mauris
-                efficitur, ultrices enim vitae, bibendum diam. Sed at magna felis. Morbi placerat diam et felis
-                hendrerit,
-                ut lacinia purus laoreet. Donec convallis ligula elit, vitae sagittis nisi tempus nec. Fusce commodo vel
-                velit ac rhoncus. Praesent porttitor scelerisque ante, a elementum justo gravida eu. Ut pharetra
-                sollicitudin felis, at pharetra diam malesuada quis. Praesent hendrerit euismod lacus a tincidunt. Nunc
-                euismod nulla in odio malesuada convallis. Fusce quis mauris eu odio euismod rutrum. Nullam faucibus
-                blandit
-                nulla, et mollis eros ultrices sed. Phasellus porttitor leo in pharetra lacinia. Donec convallis arcu a
-                arcu
-                consectetur placerat.</p>
-
-            <p>Quisque dapibus tincidunt nisl, at pulvinar est lobortis vel. Suspendisse placerat lorem neque, non
-                pellentesque nisl lobortis quis. Nunc viverra ornare ex ut pharetra. Vivamus at ipsum ut arcu vehicula
-                rhoncus. Aenean pellentesque fermentum turpis ac scelerisque. Pellentesque habitant morbi tristique
-                senectus
-                et netus et malesuada fames ac turpis egestas. Suspendisse hendrerit lacinia quam, in eleifend eros
-                egestas
-                vel. Maecenas consectetur, leo et ornare blandit, est est volutpat metus, in dictum mauris diam non
-                purus.
-                Nam vel lacus orci. Cras condimentum, tortor et bibendum tincidunt, ipsum nunc faucibus ipsum, ut
-                maximus
-                enim lectus sed magna.</p>
-
-            <p>Suspendisse in ipsum eget magna auctor convallis eu id sem. Vivamus sit amet nibh ex. Donec commodo ut
-                odio
-                quis fermentum. Nam sit amet purus sollicitudin, congue ex at, ornare mauris. Vestibulum ante ipsum
-                primis
-                in faucibus orci luctus et ultrices posuere cubilia Curae; Morbi lobortis eget enim vitae blandit. Nulla
-                pharetra tempor erat in suscipit.</p>
-
-            <p>In varius, nibh sed ultricies ullamcorper, erat est euismod purus, auctor dictum nisi tortor nec lacus.
-                Suspendisse potenti. Nunc ut pretium massa. Suspendisse nisl felis, convallis ullamcorper pretium et,
-                fermentum quis quam. Fusce accumsan leo ac felis varius, sit amet sollicitudin massa rutrum. Donec
-                pharetra
-                nisi ac dolor bibendum pellentesque. Phasellus tincidunt venenatis lacus, in interdum elit tincidunt
-                nec. In
-                a libero aliquet, scelerisque justo ultricies, accumsan libero. Ut malesuada mauris et tortor hendrerit,
-                ut
-                malesuada urna tincidunt. Morbi molestie blandit mauris. Phasellus non ultrices justo.</p>
-
-            <p> Morbi egestas metus in est accumsan egestas. Vestibulum pretium nibh nec quam venenatis mattis. Donec
-                convallis tristique arcu vitae vulputate. Vivamus sapien purus, gravida ac facilisis a, rutrum in purus.
-                Duis in interdum est. Nulla vitae est augue. Pellentesque habitant morbi tristique senectus et netus et
-                malesuada fames ac turpis egestas.</p>
+        <table class="flakes-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="#customer of customers" [class.active]="selectedCustomer === customer"
+                    (click)="selectedCustomer = customer">
+                    <td>{{ customer.id }}</td>
+                    <td>{{ customer.firstName }}</td>
+                    <td>{{ customer.lastName }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span-2">
+        <div *ngIf="selectedCustomer">
+            <fieldset class="flakes-information-box">
+                <legend>Customer Details</legend>
+                <dl>
+                    <dt>Id</dt>
+                    <dd>{{ selectedCustomer.id }}</dd>
+                </dl>
+                <div class="grid-4">
+                    <dl class="span-2">
+                        <dt>First name</dt>
+                        <dd>{{ selectedCustomer.firstName }}</dd>
+                    </dl>
+                    <dl class="span-2">
+                        <dt>Last name</dt>
+                        <dd>{{ selectedCustomer.lastName }}</dd>
+                    </dl>
+                </div>
+                <dl>
+                    <dt>Details</dt>
+                    <dd>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac lacus odio. Aenean eget nibh
+                        in sapien
+                        facilisis faucibus eu et risus. Suspendisse suscipit ante neque, quis blandit justo porta in.
+                        Mauris
+                        accumsan ipsum ex, non ultricies orci dapibus id. Quisque sollicitudin efficitur nulla, eu
+                        aliquet risus
+                        fringilla in. Quisque facilisis lorem sapien, in molestie nibh tincidunt volutpat. Etiam sit
+                        amet enim
+                        molestie, faucibus nibh vel, blandit diam. Ut tempor ante a enim imperdiet, non lacinia ipsum
+                        consequat.
+                    </dd>
+                </dl>
+            </fieldset>
         </div>
     </div>
 </div>

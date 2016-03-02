@@ -1,0 +1,69 @@
+@import "_mixins";
+
+body {
+  .maxSize();
+}
+
+.center {
+  .maxSize();
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  h1 {
+    margin-top: 0;
+  }
+}
+
+// Copied over from flakes, since Angular 2 does not allow to change the router-link-active class name yet... :)
+li.router-link-active {
+  background: #fffce2;
+  font-style: italic
+}
+
+// Menu showing the "hamburger" stripes. So we don't need the image from flakes
+.box-shadow-menu {
+  position: relative;
+  padding-left: 1.25em;
+  display: block;
+  height: 18px;
+  cursor: pointer;
+}
+
+.box-shadow-menu:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  width: 1em;
+  height: 0.15em;
+  background: black;
+  box-shadow: 0 0.25em 0 0 black, 0 0.5em 0 0 black;
+}
+
+@media only screen and (max-width: 1149px) {
+  .flakes-content {
+    transition: transform 0.5s;
+
+    &.open {
+      transform: translate3d(250px, 0px, 0px);
+    }
+  }
+}
+
+// Makes flakes using the whole width
+@media only screen and (min-width: 1150px) {
+  html {
+    .flakes-frame {
+      .flakes-content {
+        width: ~"calc(100vw - 250px)";
+      }
+    }
+  }
+}
+
+table.flakes-table tbody tr.active td {
+  background-color: lightgray;
+}

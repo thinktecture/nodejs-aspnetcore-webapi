@@ -8,8 +8,7 @@ import {AdminCustomerCreateComponent} from '../adminCustomerCreate/adminCustomer
 @Component({
     selector: 'nfn-admin-area',
     templateUrl: 'app/components/adminArea/adminArea.html',
-    directives: [RouterOutlet, NavigationComponent],
-    styleUrls: ['app/components/adminArea/adminArea.css']
+    directives: [RouterOutlet, NavigationComponent]
 })
 @RouteConfig([
     new Route({ path: '/home', name: 'AdminHome', component: AdminHomeComponent, useAsDefault: true }),

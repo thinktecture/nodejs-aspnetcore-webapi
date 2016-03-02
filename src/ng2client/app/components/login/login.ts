@@ -4,8 +4,7 @@ import {Router} from 'angular2/router';
 
 @Component({
     selector: 'nfn-login',
-    templateUrl: 'app/components/login/login.html',
-    styleUrls: ['app/components/login/login.css']
+    templateUrl: 'app/components/login/login.html'
 })
 export class LoginComponent {
     private username: string;

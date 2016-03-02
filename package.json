@@ -13,6 +13,7 @@
     "url": "https://github.com/thinktecture/nodejs-aspnetcore-webapi/issues"
   },
   "scripts": {
+    "postinstall": "typings install",
     "watch": "gulp watch",
     "typings": "typings"
   },

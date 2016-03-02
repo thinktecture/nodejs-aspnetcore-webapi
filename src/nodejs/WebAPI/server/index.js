@@ -33,6 +33,8 @@ function Server() {
         controllers.initialize(server);
         database.configure('postgres://CustomerSample:CustomerSample@localhost:5432/CustomerSampleNodejs');
         services.configure(false);
+
+        // TODO: Code me!
     };
 
     function initializeSwagger(server, port) {

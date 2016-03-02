@@ -8,6 +8,7 @@ const services = require('../service');
  */
 function CustomerController() {
     this.initialize = function (server) {
+        // TODO: Code me!
     };
 }
 

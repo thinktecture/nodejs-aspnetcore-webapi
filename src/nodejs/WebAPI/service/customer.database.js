@@ -8,7 +8,7 @@ const database = require('../database');
  */
 function CustomerService() {
     this.create = (firstName, lastName) => {
-        
+        // TODO: Code me!
     };
 
     this.list = () => {

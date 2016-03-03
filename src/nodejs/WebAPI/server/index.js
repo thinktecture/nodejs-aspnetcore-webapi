@@ -98,7 +98,7 @@ function Server() {
             host: `localhost:${port}`,
             // Reference the files containing the swagger definitions
             apis: [
-                path.join(__dirname, '..', 'database', 'mongo', 'customerModel.js'),
+                path.join(__dirname, '..', 'database', config.db.type, 'customerModel.js'),
                 path.join(__dirname, '..', 'controllers', 'customer.js')
             ],
             produces: ['application/json'],

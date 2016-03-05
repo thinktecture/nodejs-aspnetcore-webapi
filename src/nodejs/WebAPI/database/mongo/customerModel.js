@@ -5,8 +5,8 @@ var customerSchema = new Schema({
     firstName: String,
     lastName: String
 }, {
-    toObject: {virtuals: true},
-    toJSON: {virtuals: true}
+    toObject: { virtuals: true },
+    toJSON: { virtuals: true }
 });
 
 customerSchema.virtual('id').get(function () {

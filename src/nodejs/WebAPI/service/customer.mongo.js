@@ -25,10 +25,10 @@ function CustomerService() {
     this.create = (firstName, lastName) => {
         var customer = new Customer({
             firstName: firstName,
-                lastName: lastName
+            lastName: lastName
         });
 
-        return  customer.save();
+        return customer.save();
     };
 
     /**
@@ -37,7 +37,7 @@ function CustomerService() {
      * @returns {Promise}
      */
     this.remove = id => {
-        return Customer.find({_id: id}).remove().exec();
+        return Customer.find({ _id: id }).remove().exec();
     };
 }
 

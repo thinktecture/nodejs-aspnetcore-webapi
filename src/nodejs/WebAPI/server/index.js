@@ -15,7 +15,7 @@ const restify = require('restify'),
 // Require the services
 const services = require('../service'),
 
-    // Require configuration
+// Require configuration
     config = require('../config'),
 
 // Require the controllers

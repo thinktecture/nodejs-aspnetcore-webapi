@@ -35,7 +35,7 @@
     "gulp-sourcemaps": "1.6.0",
     "gulp-typescript": "2.11.0",
     "gulp-watch": "4.3.5",
-    "mongoose": "^4.4.6",
+    "mongoose": "4.4.6",
     "oauth2-server": "2.4.1",
     "pg": "4.4.4",
     "reflect-metadata": "0.1.3",

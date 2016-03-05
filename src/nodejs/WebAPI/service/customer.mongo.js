@@ -1,6 +1,7 @@
 'use strict';
 
-const database = require('../database');
+const database = require('../database/mongo'),
+    Customer = require('../database/mongo/customerModel');
 
 /**
  * @public
@@ -12,8 +13,7 @@ function CustomerService() {
      * @returns {Promise<Array>}
      */
     this.list = () => {
-        return database.get()
-            .then(db => db.models.customer.findAll());
+        return Customer.find();
     };
 
     /**
@@ -23,11 +23,12 @@ function CustomerService() {
      * @returns {Promise}
      */
     this.create = (firstName, lastName) => {
-        return database.get()
-            .then(db => db.models.customer.create({
-                firstName: firstName,
+        var customer = new Customer({
+            firstName: firstName,
                 lastName: lastName
-            }));
+        });
+
+        return  customer.save();
     };
 
     /**
@@ -36,9 +37,7 @@ function CustomerService() {
      * @returns {Promise}
      */
     this.remove = id => {
-        return database.get()
-            .then(db => db.models.customer.findById(id))
-            .then(model => model.destroy());
+        return Customer.find({_id: id}).remove().exec();
     };
 }
 

@@ -1,7 +1,8 @@
 'use strict';
 
 const customerInMemoryService = require('./customer.inmemory'),
-    customerDatabaseService = require('./customer.database');
+    globalConfig = require('../config'),
+    customerDatabaseService = require(`./customer.${globalConfig.db.type}`);
 
 let config = {};
 

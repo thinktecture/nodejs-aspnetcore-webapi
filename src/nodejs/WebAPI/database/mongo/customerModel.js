@@ -1,6 +1,3 @@
-/**
- * Created by ppa on 3/3/16.
- */
 const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 

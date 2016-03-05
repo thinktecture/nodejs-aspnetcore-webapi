@@ -112,6 +112,10 @@ This section contains notable third-party libraries.
 * [Angular 2](https://angular.io) itself. ;-)
 * [Gulp](http://gulpjs.com) for building and watching
 
+## Contributors
+
+* [ppa-pawe](https://github.com/ppa-pawe): Added Node.js MongoDB support
+
 ## Additional resources
 
 * [Node.js at Paypal](https://www.paypal-engineering.com/?s=node)

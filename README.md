@@ -18,8 +18,9 @@ Both Node.js and ASP.NET Core 1.0 APIs are split into two projects:
 		* `HTTP DELETE api/customer/{id}`: Removes a customer
 	* Swagger support via `http://localhost:5000/swagger`
 	* Both project can either use an InMemory storage or a PostgreSQL backend. Per default, they use PostgreSQL. 
-		* Node.js: 
+		* Node.js:
 			* Switch the `service.configure(false)` to `true` [here](src/nodejs/WebAPI/server/index.js#L72)
+			* Additionally Node.js supports MongoDB which can be switched [here](src/nodejs/WebAPI/config/index.js)
 			* Default PostgreSQL settings:
 				* Host: `localhost`
 				* Database name: `CustomerSampleNodejs`
@@ -50,6 +51,12 @@ The easiest way to use PostgreSQL on Mac OS X is by installing [Postgres.app](ht
 #### Windows
 
 To install PostgreSQL on Windows you can use a graphical installer which can be downloaded [here](http://www.postgresql.org/download/windows/). It comes with pgAdmin, so you don't need to install it separately. After installation use pgAdmin to create the user and databases as shown above.
+
+### MongoDB
+
+To install MongoDB, head over to the [official website](https://www.mongodb.org/), download and install it regarding their documentation.
+
+MongoDB is currently not supported for ASP.NET Core 1.0 Web API project, yet.
 
 ### Node.js
 
@@ -90,6 +97,10 @@ If you want to start the presentation yourself, you need to spin up a static htt
 ## Third-Party Libraries
 
 This section contains notable third-party libraries.
+
+### General
+
+* [MongoDB](https://www.mongodb.org/)
 
 ### Node.js
 
